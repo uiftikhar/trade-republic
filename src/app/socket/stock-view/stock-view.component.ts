@@ -10,6 +10,8 @@ import {
   FormGroup,
 } from '@angular/forms';
 
+import { tap } from 'rxjs';
+
 import {
   WebsocketConnectionService,
 } from '../services/websocket-connection.service';
@@ -24,12 +26,7 @@ import {
 export class StockViewComponent implements OnInit, OnDestroy {
   stocksForm = new FormGroup({
     newIsin: new FormControl(''),
-    stocks: new FormArray([
-      new FormGroup({
-        isin: new FormControl(''),
-        price: new FormControl(''),
-      }),
-    ]),
+    stocks: new FormArray([]),
   });
   stocks = this.stocksForm.get('stocks') as FormArray;
   constructor(
@@ -37,28 +34,61 @@ export class StockViewComponent implements OnInit, OnDestroy {
     private readonly formBuilder: FormBuilder
   ) {}
 
+  get isButtonDisabled() {
+    const isinFormValue = this.stocksForm.controls['newIsin'].value;
+    return (
+      // Abstract this to own function ?
+      this.stocks.value.find(
+        (item: { isin: string }) => item.isin === isinFormValue
+      ) || isinFormValue === ''
+    );
+  }
   ngOnInit(): void {
-    this.wsService.messages.subscribe((res) => {
-      console.log(res);
-      this.stocks.push(
-        this.formBuilder.group({
-          isin: res.isin,
-          price: res.price,
+    this.wsService.messages
+      .pipe(
+        tap((res) => {
+          const currentIsin = this.stocks.value.filter(
+            (item: { isin: string }) => {
+              return item.isin === res.isin;
+            }
+          );
+
+          currentIsin.length === 0
+            ? this.stocks.push(
+                this.formBuilder.group({
+                  isin: res.isin,
+                  price: res.price,
+                  isSubscribed: true,
+                })
+              )
+            : (currentIsin[0].price = res.price);
         })
-      );
-    });
+      )
+      .subscribe();
   }
 
   searchNewIsin() {
     const isin = this.stocksForm.controls['newIsin'].value;
-    console.log(isin);
     this.wsService.sendMessage(isin);
-    console.log(this.stocks);
   }
 
   ngOnDestroy(): void {
     this.stocks.value.forEach((val: { isin: string }) => {
       this.wsService.closeConnection(val.isin);
     });
+  }
+
+  cancelSubscription(isin: string, index: number) {
+    this.stocks.controls[index].patchValue({
+      isSubscribed: false,
+    });
+    this.wsService.closeConnection(isin);
+  }
+
+  startSubscription(isin: string, index: number) {
+    this.stocks.controls[index].patchValue({
+      isSubscribed: true,
+    });
+    this.wsService.sendMessage(isin);
   }
 }

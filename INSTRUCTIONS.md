@@ -38,8 +38,10 @@ Implement the following features for the sample SPA:
 Please include the answers to the following in your README: 4. What happens in case the websocket disconnects? How would you go further to keep
 the live data available or inform the user? Please discuss the challenges.
 
+<!-- Switch to a CDN ? or another server -->
+
 5. What happens if a user adds an instrument multiple times to their list? Please discuss
-   possible challenges and mitigations. Please discuss possible challenges and mitigations.
+   possible challenges and mitigation's. Please discuss possible challenges and mitigation's.
 
 ## Things we care for:
 

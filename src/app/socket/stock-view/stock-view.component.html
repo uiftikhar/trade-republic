@@ -1,23 +1,44 @@
-<p>stock-view works!</p>
-
 <form [formGroup]="stocksForm">
-  <span>New ISIN: </span>
-  <input formControlName="newIsin" />
-  <!-- TODO: fix style and remove float -->
-  <button (click)="searchNewIsin()" style="float: right">click</button>
-  <div class="card">
-    <ng-container formArrayName="stocks">
-      <div *ngFor="let stock of stocks.controls; index as i">
+  <div style="margin-bottom: 1rem">
+    <span>New ISIN: </span>
+    <input formControlName="newIsin" />
+    <!-- TODO: fix style and remove float -->
+    <button
+      [disabled]="isButtonDisabled"
+      (click)="searchNewIsin()"
+      style="float: right"
+    >
+      click
+    </button>
+  </div>
+  <ng-container formArrayName="stocks">
+    <div
+      *ngFor="let stock of stocks.controls; index as i"
+      style="margin-bottom: 1rem"
+    >
+      <div class="card">
         <ng-container [formGroupName]="i">
-          <!-- TODO Remove ngIf -->
-          <p *ngIf="stock.value.price !== ''">
-            <span class="bold">Price: </span><span>{{ stock.value.isin }}</span>
+          <p>
+            <span class="bold">Isin: </span><span>{{ stock.value.isin }}</span>
           </p>
-          <p *ngIf="stock.value.price !== ''">
-            <span class="bold">Isin: </span><span>{{ stock.value.price }}</span>
+          <p>
+            <span class="bold">Price: </span
+            ><span>{{ stock.value.price }}</span>
           </p>
+          <button
+            *ngIf="stock.value.isSubscribed"
+            (click)="cancelSubscription(stock.value.isin, i)"
+          >
+            cancel subscription
+          </button>
+          <button
+            *ngIf="!stock.value.isSubscribed"
+            (click)="startSubscription(stock.value.isin, i)"
+          >
+            start subscription
+          </button>
         </ng-container>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
 </form>

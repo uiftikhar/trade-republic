@@ -18,9 +18,6 @@ export class WebsocketConnectionService {
     this.wsSubject$.next({
       subscribe: isin,
     });
-    this.wsSubject$.next({
-      unsubscribe: isin,
-    });
   }
 
   public closeConnection(isin: string) {
