@@ -1,15 +1,22 @@
 <form [formGroup]="stocksForm">
   <div style="margin-bottom: 1rem">
-    <span>New ISIN: </span>
-    <input formControlName="newIsin" />
+    <!-- <span>New ISIN: </span> -->
+    <!-- <input class="input-search" formControlName="newIsin" /> -->
     <!-- TODO: fix style and remove float -->
-    <button
+    <!-- <button><fa-icon [icon]="searchIcon"></fa-icon></button> -->
+    <app-input></app-input>
+    <app-icon-button
+      [disabled]="isButtonDisabled"
+      (onButtonClick)="searchNewIsin()"
+      [search]="true"
+    ></app-icon-button>
+    <!-- <button
       [disabled]="isButtonDisabled"
       (click)="searchNewIsin()"
       style="float: right"
     >
       click
-    </button>
+    </button> -->
   </div>
   <ng-container formArrayName="stocks">
     <div

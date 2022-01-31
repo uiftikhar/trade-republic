@@ -12,6 +12,8 @@ import {
 
 import { tap } from 'rxjs';
 
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import {
   WebsocketConnectionService,
 } from '../services/websocket-connection.service';
@@ -24,6 +26,7 @@ import {
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockViewComponent implements OnInit, OnDestroy {
+  searchIcon = faSearch;
   stocksForm = new FormGroup({
     newIsin: new FormControl(''),
     stocks: new FormArray([]),
