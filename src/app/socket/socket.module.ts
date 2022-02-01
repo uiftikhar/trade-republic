@@ -7,6 +7,6 @@ import { StockViewComponent } from './stock-view/stock-view.component';
 
 @NgModule({
   declarations: [StockViewComponent],
-  imports: [SharedModule, CommonModule, SocketRoutingModule],
+  imports: [CommonModule, SocketRoutingModule, SharedModule],
 })
 export class SocketModule {}

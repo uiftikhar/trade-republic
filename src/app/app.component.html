@@ -304,17 +304,19 @@
   }
 </style>
 
-<h1>Test</h1>
+<div style="padding: 1rem 2rem">
+  <h1>Test</h1>
 
-<button routerLink="/stocks">Let's view some stock prices</button>
-<button routerLink="">Home</button>
+  <app-button
+    routerLink="/stocks"
+    [text]="'Stock prices'"
+    [class]="['button-inverse']"
+  ></app-button>
+  <app-button
+    routerLink="/"
+    [text]="'Home'"
+    [class]="['button-inverse']"
+  ></app-button>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

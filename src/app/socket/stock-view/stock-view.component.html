@@ -4,7 +4,11 @@
     <!-- <input class="input-search" formControlName="newIsin" /> -->
     <!-- TODO: fix style and remove float -->
     <!-- <button><fa-icon [icon]="searchIcon"></fa-icon></button> -->
-    <app-input></app-input>
+    <app-input
+      formControlName="newIsin"
+      [formGroup]="stocksForm"
+      [placeholder]="'new ISIN'"
+    ></app-input>
     <app-icon-button
       [disabled]="isButtonDisabled"
       (onButtonClick)="searchNewIsin()"
@@ -32,18 +36,20 @@
             <span class="bold">Price: </span
             ><span>{{ stock.value.price }}</span>
           </p>
-          <button
-            *ngIf="stock.value.isSubscribed"
-            (click)="cancelSubscription(stock.value.isin, i)"
-          >
-            cancel subscription
-          </button>
-          <button
-            *ngIf="!stock.value.isSubscribed"
-            (click)="startSubscription(stock.value.isin, i)"
-          >
-            start subscription
-          </button>
+          <div>
+            <app-button
+              [disabled]="!stock.value.isSubscribed"
+              [text]="'cancel'"
+              [class]="['button-inverse']"
+              (handleClick)="cancelSubscription(stock.value.isin, i)"
+            ></app-button>
+            <app-button
+              [disabled]="stock.value.isSubscribed"
+              [text]="'start'"
+              [class]="['button-inverse']"
+              (handleClick)="startSubscription(stock.value.isin, i)"
+            ></app-button>
+          </div>
         </ng-container>
       </div>
     </div>

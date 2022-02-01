@@ -16,7 +16,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export class IconButtonComponent implements OnInit {
   @Input() search: boolean | undefined;
   @Input() disabled: boolean | undefined;
-  // TODO Strong type this
   @Output() onButtonClick = new EventEmitter();
   searchIcon = faSearch;
   constructor() {}

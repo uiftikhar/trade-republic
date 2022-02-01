@@ -82,6 +82,7 @@ export class StockViewComponent implements OnInit, OnDestroy {
   }
 
   cancelSubscription(isin: string, index: number) {
+    console.log(isin);
     this.stocks.controls[index].patchValue({
       isSubscribed: false,
     });

@@ -1,0 +1,162 @@
+.button {
+  /*shadow*/
+  --shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+
+  /* normal color scheme */
+  --light: rgb(255, 255, 255);
+  --light-light: rgb(245, 245, 245);
+  --light-contrast: rgb(0, 0, 0);
+  --disabled: rgb(141 141 141);
+  --disabled-contrast: rgb(255, 255, 255);
+
+  /* success color scheme */
+  --success: rgb(56, 200, 56);
+  --success-light: rgb(36, 220, 36);
+  --success-contrast: rgb(255, 255, 255);
+
+  /* danger color scheme */
+  --danger: rgb(250, 56, 56);
+  --danger-light: rgb(255, 86, 86);
+  --danger-contrast: rgb(255, 255, 255);
+
+  /* warning color scheme */
+  --warning: orange;
+  --warning-light: rgb(255, 190, 0);
+  --warning-contrast: rgb(255, 255, 255);
+}
+.button {
+  outline: 0;
+  border: 0;
+  background: var(--light-light);
+  color: var(--light-contrast);
+  padding: 0.625rem 1.25rem;
+  // margin-right: 0.25rem;
+  text-transform: uppercase;
+  transition: 0.3s;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--disabled);
+    color: var(--disabled-contrast);
+    cursor: default;
+  }
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]),
+  &-raised {
+    box-shadow: var(--shadow);
+    background: var(--light-light);
+  }
+
+  &-raised {
+    background: var(--light);
+  }
+
+  &-raised:hover:not([disabled]),
+  &-raised:active:not([disabled]) {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background: var(--light-light);
+  }
+
+  &-inverse:hover:not([disabled]),
+  &-inverse:active:not([disabled]) {
+    background: var(--light-contrast);
+    color: var(--light);
+  }
+
+  &-flat {
+    background: var(--light);
+  }
+
+  &-success {
+    background: var(--success);
+    color: var(--success-contrast);
+    &:hover:not([disabled]),
+    &:active:not([disabled]) {
+      background: var(--success-light);
+      color: var(--success-contrast);
+    }
+    &.button-inverse:hover,
+    &.button-inverse:active {
+      background: var(--success-contrast);
+      color: var(--success);
+    }
+    &.button-flat {
+      background: var(--success-contrast);
+      color: var(--success);
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        background: var(--success-contrast);
+        color: var(--success-light);
+      }
+      &.button-inverse:hover,
+      &.button-inverse:active {
+        background: var(--success);
+        color: var(--success-contrast);
+      }
+    }
+  }
+
+  &-danger {
+    background: var(--danger);
+    color: var(--danger-contrast);
+    &:hover:not([disabled]),
+    &:active:not([disabled]) {
+      background: var(--danger-light);
+      color: var(--danger-contrast);
+    }
+    &.button-inverse:hover:not([disabled]),
+    &.button-inverse:active:not([disabled]) {
+      background: var(--danger-contrast);
+      color: var(--danger);
+    }
+    &.button-flat {
+      background: var(--danger-contrast);
+      color: var(--danger);
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        background: var(--danger-contrast);
+        color: var(--danger-light);
+      }
+      &.button-inverse:hover:not([disabled]),
+      &.button-inverse:active:not([disabled]) {
+        background: var(--danger);
+        color: var(--danger-contrast);
+      }
+    }
+  }
+
+  &-warning {
+    background: var(--warning);
+    color: var(--warning-contrast);
+    &:hover:not([disabled]),
+    &:active:not([disabled]) {
+      background: var(--warning-light);
+      color: var(--warning-contrast);
+    }
+    &.button-inverse:hover:not([disabled]),
+    &.button-inverse:active:not([disabled]) {
+      background: var(--warning-contrast);
+      color: var(--warning);
+    }
+
+    &.button-flat {
+      background: var(--warning-contrast);
+      color: var(--warning);
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        background: var(--warning-contrast);
+        color: var(--warning-light);
+      }
+      &.button-inverse:hover:not([disabled]),
+      &.button-inverse:active:not([disabled]) {
+        background: var(--warning);
+        color: var(--warning-contrast);
+      }
+    }
+  }
+}
