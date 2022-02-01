@@ -1,9 +1,6 @@
+<h1 style="margin-bottom: 2rem">View Stocks</h1>
 <form [formGroup]="stocksForm">
   <div style="margin-bottom: 1rem">
-    <!-- <span>New ISIN: </span> -->
-    <!-- <input class="input-search" formControlName="newIsin" /> -->
-    <!-- TODO: fix style and remove float -->
-    <!-- <button><fa-icon [icon]="searchIcon"></fa-icon></button> -->
     <app-input
       formControlName="newIsin"
       [formGroup]="stocksForm"
@@ -14,20 +11,49 @@
       (onButtonClick)="searchNewIsin()"
       [search]="true"
     ></app-icon-button>
-    <!-- <button
-      [disabled]="isButtonDisabled"
-      (click)="searchNewIsin()"
-      style="float: right"
-    >
-      click
-    </button> -->
   </div>
-  <ng-container formArrayName="stocks">
+
+  <div formArrayName="stocks" class="flex flex-wrap">
     <div
       *ngFor="let stock of stocks.controls; index as i"
       style="margin-bottom: 1rem"
     >
-      <div class="card">
+      <ng-container [formGroupName]="i">
+        <app-card style="margin-right: 1rem; margin-bottom: 1rem">
+          <ng-container card-header>
+            <!-- TODO test accessability -->
+            <h1 class="h1">current stock price</h1>
+          </ng-container>
+          <ng-container card-content>
+            <div class="flex align-base">
+              <h2 class="h2 medium">ISIN:</h2>
+              <h4 class="h4 medium">{{ stock.value.isin }}</h4>
+            </div>
+            <div class="flex align-base">
+              <h2 class="h2 medium">Price:</h2>
+              <h4 class="h4 medium">
+                $ {{ stock.value.price | number: "2.2" }}
+              </h4>
+            </div>
+          </ng-container>
+          <ng-container card-footer>
+            <app-button
+              [disabled]="stock.value.isSubscribed"
+              [text]="'start'"
+              [class]="['button-inverse']"
+              (handleClick)="startSubscription(stock.value.isin, i)"
+            ></app-button>
+            <app-button
+              [disabled]="!stock.value.isSubscribed"
+              [text]="'cancel'"
+              [class]="['button-inverse']"
+              (handleClick)="cancelSubscription(stock.value.isin, i)"
+            ></app-button>
+          </ng-container>
+        </app-card>
+      </ng-container>
+
+      <!-- <div class="card">
         <ng-container [formGroupName]="i">
           <p>
             <span class="bold">Isin: </span><span>{{ stock.value.isin }}</span>
@@ -51,7 +77,7 @@
             ></app-button>
           </div>
         </ng-container>
-      </div>
+      </div> -->
     </div>
-  </ng-container>
+  </div>
 </form>

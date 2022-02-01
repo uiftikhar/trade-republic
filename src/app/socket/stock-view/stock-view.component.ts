@@ -26,6 +26,8 @@ import {
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockViewComponent implements OnInit, OnDestroy {
+  // TODO unsubscribe
+  private unsubscribe = [];
   searchIcon = faSearch;
   stocksForm = new FormGroup({
     newIsin: new FormControl(''),
@@ -82,7 +84,6 @@ export class StockViewComponent implements OnInit, OnDestroy {
   }
 
   cancelSubscription(isin: string, index: number) {
-    console.log(isin);
     this.stocks.controls[index].patchValue({
       isSubscribed: false,
     });

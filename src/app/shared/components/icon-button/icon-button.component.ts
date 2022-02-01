@@ -20,9 +20,7 @@ export class IconButtonComponent implements OnInit {
   searchIcon = faSearch;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.disabled);
-  }
+  ngOnInit(): void {}
 
   onClick() {
     this.onButtonClick.emit();

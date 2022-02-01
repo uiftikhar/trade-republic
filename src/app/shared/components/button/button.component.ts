@@ -25,7 +25,6 @@ export class ButtonComponent implements OnInit {
   }
 
   onButtonClick(event: Event) {
-    console.log(event);
     this.handleClick.emit(event);
   }
 }

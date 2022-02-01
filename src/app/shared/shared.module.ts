@@ -8,6 +8,8 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ButtonComponent } from './components/button/button.component';
+import { CardComponent } from './components/card/card.component';
+import { HeaderComponent } from './components/header/header.component';
 import {
   IconButtonComponent,
 } from './components/icon-button/icon-button.component';
@@ -15,7 +17,13 @@ import { InputComponent } from './components/input/input.component';
 import { SharedRoutingModule } from './shared-routing.module';
 
 @NgModule({
-  declarations: [ButtonComponent, IconButtonComponent, InputComponent],
+  declarations: [
+    ButtonComponent,
+    IconButtonComponent,
+    InputComponent,
+    HeaderComponent,
+    CardComponent,
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -27,6 +35,8 @@ import { SharedRoutingModule } from './shared-routing.module';
     ButtonComponent,
     InputComponent,
     IconButtonComponent,
+    CardComponent,
+    HeaderComponent,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,

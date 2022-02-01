@@ -1,51 +1,7 @@
-<!-- <div style="display: flex; justify-content: space-evenly; margin-bottom: 5rem">
-  <button class="button"><span>Normal</span></button>
-  <button class="button button-success"><span>Success</span></button>
-  <button class="button button-warning"><span>Warning</span></button>
-  <button class="button button-danger"><span>Danger</span></button>
-</div>
-<div style="display: flex; justify-content: space-evenly; margin-bottom: 5rem">
-  <button class="button button-flat"><span>Normal flat</span></button>
-  <button class="button button-flat button-success">
-    <span>Success</span>
-  </button>
-  <button class="button button-flat button-warning">
-    <span>Warning</span>
-  </button>
-  <button class="button button-flat button-danger"><span>Danger</span></button>
-</div>
-
-<div style="display: flex; justify-content: space-evenly; margin-bottom: 5rem">
-  <button class="button button-flat button-raised">
-    <span>Normal flat raised</span>
-  </button>
-  <button class="button button-flat button-success button-raised">
-    <span>Success</span>
-  </button>
-  <button class="button button-flat button-warning button-raised">
-    <span>Warning</span>
-  </button>
-  <button class="button button-flat button-danger button-raised">
-    <span>Danger</span>
-  </button>
-</div>
-
-<div style="display: flex; justify-content: space-evenly; margin-bottom: 5rem">
-  <button class="button button-inverse"><span>Normal inverse</span></button>
-  <button class="button button-success button-inverse">
-    <span>Success</span>
-  </button>
-  <button class="button button-warning button-inverse">
-    <span>Warning</span>
-  </button>
-  <button class="button button-danger button-inverse">
-    <span>Danger</span>
-  </button>
-</div> -->
 <button
   [disabled]="disabled"
   class="button {{ classes }}"
   (click)="onButtonClick($event)"
 >
-  <span>{{ text }}</span>
+  <span class="ff-sans-normal">{{ text }}</span>
 </button>

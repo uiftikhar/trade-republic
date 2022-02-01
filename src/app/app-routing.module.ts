@@ -4,6 +4,8 @@ import {
   Routes,
 } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
+
 const routes: Routes = [
   {
     path: 'stocks',
@@ -12,8 +14,9 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full',
+    // redirectTo: '',
+    // pathMatch: 'full',
+    component: HomeComponent,
   },
 ];
 @NgModule({
