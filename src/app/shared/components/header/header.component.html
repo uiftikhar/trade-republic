@@ -1,0 +1,35 @@
+<header class="primary-header flex">
+  <div>
+    <!-- TODO change logo -->
+    <img src="/assets/trade-logo.svg" alt="stock app logo" class="logo" />
+  </div>
+  <button
+    #mobileNavToggle
+    (click)="toggleSideNave()"
+    class="mobile-nav-toggle"
+    aria-controls="primary-navigation"
+  >
+    <span class="sr-only" aria-expanded="false">Menu</span>
+  </button>
+  <nav>
+    <div *ngIf="showOverlay" class="overlay"></div>
+    <ul
+      #navigation
+      id="primary-navigation"
+      data-visible="false"
+      class="primary-navigation underline-indicators flex"
+    >
+      <ng-container *ngFor="let navItem of urls; let i = index">
+        <li [class.active]="selectedIndex === i">
+          <a
+            (click)="setSelectedIndex(i)"
+            routerLink="{{ navItem.path }}"
+            class="ff-sans-cond uppercase letter-spacing-2"
+            ><span aria-hidden="true">{{ i | number: "2.0-0" }}</span
+            >{{ navItem.label }}</a
+          >
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+</header>

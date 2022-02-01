@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  background: hsl(var(--clr-dark) / 0.85);
+  padding: 1.5rem 2rem;
+  color: hsl(var(--clr-white) / 1);
+  max-width: 21.5rem;
+  &header,
+  .header {
+    height: 3.5rem;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-content {
+    margin-bottom: 1rem;
+  }
+
+  &footer,
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
