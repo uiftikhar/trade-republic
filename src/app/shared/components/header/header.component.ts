@@ -45,12 +45,10 @@ export class HeaderComponent implements AfterViewInit {
           this.selectedIndex = this.urls.findIndex(
             (url) => url.path === (val as NavigationEnd).url
           );
-          // this.toggleSideNave();
         })
       )
       .subscribe();
   }
-  // TODO fix on reload
   selectedIndex: number = 0;
 
   ngAfterViewInit() {}

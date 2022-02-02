@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 
@@ -13,14 +12,11 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './icon-button.component.html',
   styleUrls: ['./icon-button.component.scss'],
 })
-export class IconButtonComponent implements OnInit {
-  @Input() search: boolean | undefined;
-  @Input() disabled: boolean | undefined;
+export class IconButtonComponent {
+  @Input() search!: boolean;
+  @Input() disabled!: boolean;
   @Output() onButtonClick = new EventEmitter();
   searchIcon = faSearch;
-  constructor() {}
-
-  ngOnInit(): void {}
 
   onClick() {
     this.onButtonClick.emit();

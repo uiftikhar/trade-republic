@@ -49,7 +49,8 @@ export class StockViewComponent implements OnInit, OnDestroy {
     );
   }
   ngOnInit(): void {
-    this.wsService.messages
+    this.wsService
+      .messages()
       .pipe(
         tap((res) => {
           const currentIsin = this.stocks.value.filter(
