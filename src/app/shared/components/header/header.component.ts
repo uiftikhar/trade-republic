@@ -1,7 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
+  OnDestroy,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -12,6 +12,7 @@ import {
 
 import {
   filter,
+  Subscription,
   tap,
 } from 'rxjs';
 
@@ -20,9 +21,9 @@ import {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnDestroy {
   // TODO Unsubscribe from all listeners
-  private subscriptions = [];
+  private subscriptions: Subscription[] = [];
 
   @ViewChild('navigation') navigationElement: ElementRef | undefined;
   @ViewChild('mobileNavToggle') mobileNavToggle: ElementRef | undefined;
@@ -38,7 +39,7 @@ export class HeaderComponent implements AfterViewInit {
     },
   ];
   constructor(private router: Router, private renderer: Renderer2) {
-    this.router.events
+    const subscription = this.router.events
       .pipe(
         filter((val) => val instanceof NavigationEnd),
         tap((val: unknown) => {
@@ -48,10 +49,16 @@ export class HeaderComponent implements AfterViewInit {
         })
       )
       .subscribe();
+
+    this.subscriptions.push(subscription);
   }
   selectedIndex: number = 0;
 
-  ngAfterViewInit() {}
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
   setSelectedIndex(index: number) {
     this.selectedIndex = index;

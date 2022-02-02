@@ -10,7 +10,10 @@ import {
   FormGroup,
 } from '@angular/forms';
 
-import { tap } from 'rxjs';
+import {
+  Subscription,
+  tap,
+} from 'rxjs';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,7 +30,7 @@ import {
 })
 export class StockViewComponent implements OnInit, OnDestroy {
   // TODO unsubscribe
-  private unsubscribe = [];
+  private unsubscribe: Subscription[] = [];
   searchIcon = faSearch;
   stocksForm = new FormGroup({
     newIsin: new FormControl(''),
@@ -49,7 +52,7 @@ export class StockViewComponent implements OnInit, OnDestroy {
     );
   }
   ngOnInit(): void {
-    this.wsService
+    const subscribe = this.wsService
       .messages()
       .pipe(
         tap((res) => {
@@ -71,6 +74,8 @@ export class StockViewComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
+    this.unsubscribe.push(subscribe);
   }
 
   searchNewIsin() {
@@ -82,6 +87,8 @@ export class StockViewComponent implements OnInit, OnDestroy {
     this.stocks.value.forEach((val: { isin: string }) => {
       this.wsService.closeConnection(val.isin);
     });
+
+    this.unsubscribe.forEach((subscription) => subscription.unsubscribe());
   }
 
   cancelSubscription(isin: string, index: number) {
